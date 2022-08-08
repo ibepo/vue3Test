@@ -7,46 +7,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://unpkg.com/vue@3"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <title>Lists,computed properties,tailwindcss,checkbox,input</title>
+  <title>v-show,v-if,computed,arr.filter()</title>
 </head>
 
 <body class="h-full grid place-items-center ">
   <div id="app">
-    <h1 class="font-extralight mb-4">Lists,computed properties,tailwindcss,checkbox,input</h1>
-    <section>
-      <h2 class="font-bold font-sans mb-2">In Progress</h2>
-      <ul>
-        <li v-for="(item, index) in list.filter(a=>!a.complete)" :key="item">
-          <!-- 将input包裹到label中，点击文字就可以响应checkbox -->
-          <label>
-            {{item.name}}
-            <input type="checkbox" v-model="item.complete">
-          </label>
-        </li>
-      </ul>
-    </section>
-    <section v-show="list.filter(a=>a.complete).length">
-      <h2 class="font-bold  font-sans  mt-8 mb-2">Complete List</h2>
-      <ul>
-        <li v-for="(item, index) in list.filter(a=>a.complete)" :key="item">
-          <!-- 将input包裹到label中，点击文字就可以响应checkbox -->
-          <label>
-            {{item.name}}
-            <input type="checkbox" v-model="item.complete">
-          </label>
-        </li>
-      </ul>
-    </section>
+    <h1 class="font-extralight mb-4">v-show,v-if,computed,arr.filter()</h1>
+
+    <div class="flex gap-8">
+      <section v-show="inProgressList.length">
+        <h2 class="font-bold font-sans mb-2">In Progress</h2>
+        <ul>
+          <li v-for="(item, index) in inProgressList" :key="item.id">
+            <!-- 将input包裹到label中，点击文字就可以响应checkbox -->
+            <label>
+              {{item.name}}
+              <input type="checkbox" v-model="item.complete">
+            </label>
+          </li>
+        </ul>
+      </section>
+
+      <section v-show="completedList.length">
+        <h2 class="font-bold  font-sans  mb-2">Complete List</h2>
+        <ul>
+          <li v-for="(item, index) in completedList" :key="item.id">
+            <!-- 将input包裹到label中，点击文字就可以响应checkbox -->
+            <label>
+              {{item.name}}
+              <input type="checkbox" v-model="item.complete">
+            </label>
+          </li>
+        </ul>
+      </section>
+    </div>
   </div>
   <script>
     let app = {
       data() {
         return {
           list: [
-            { name: 'Finish project', complete: false },
-            { name: 'Read chapter 4', complete: false },
-            { name: 'trun in Homework', complete: false },
+            { name: 'Finish project', complete: false, id: 1 },
+            { name: 'Read chapter 4', complete: false, id: 2 },
+            { name: 'trun in Homework', complete: false, id: 3 },
           ]
+        }
+      },
+      computed: {
+        completedList() {
+          return this.list.filter(l => l.complete)
+        },
+        inProgressList() {
+          return this.list.filter(l => !l.complete)
         }
       }
     }
