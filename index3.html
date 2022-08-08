@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-200">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Lists,computed properties,tailwindcss,checkbox,input</title>
+</head>
+
+<body class="h-full grid place-items-center ">
+  <div id="app">
+    <h1 class="font-extralight mb-4">Lists,computed properties,tailwindcss,checkbox,input</h1>
+    <section>
+      <h2 class="font-bold font-mono mb-2">list</h2>
+      <ul>
+        <li v-for="(item, index) in list" :key="item">
+          <!-- 将input包裹到label中，点击文字就可以响应checkbox -->
+          <label>
+            {{item.name}}
+            <input type="checkbox" v-model="item.complete">
+          </label>
+        </li>
+      </ul>
+
+      <!-- pre标签可以识别json中的\n\t,显示的json串更加友好 -->
+      <pre class="mt-4">
+      {{list}}
+      </pre>
+
+      {{list}}
+    </section>
+  </div>
+  <script>
+    let app = {
+      data() {
+        return {
+          list: [
+            { name: 'Finish project', complete: false },
+            { name: 'Read chapter 4', complete: false },
+            { name: 'trun in Homework', complete: false },
+          ]
+        }
+      }
+    }
+    Vue.createApp(app).mount('#app')
+  </script>
+</body>
+
+</html>
