@@ -17,7 +17,13 @@
           return{
             greeting:'what is up'
           }
-        }
+        },
+        mounted() {
+          setTimeout(() => {
+            alert('hello') 
+          // alert('hello')
+          }, 3000);
+        },
       }).mount('#app')
     </script>
   </body>
