@@ -7,21 +7,24 @@
     <script src="https://unpkg.com/vue@3"></script>
   </head>
   <body>
+
    <div id="app">
-<input type="text" v-model="greeting">
+    <input type="text" v-model="greeting">
     {{greeting}} ({{greeting.length}})
+
    </div>
+
     <script>
       Vue.createApp({
         data(){
           return{
-            greeting:'what is up'
+            greeting:''
           }
         },
         mounted() {
           setTimeout(() => {
             // alert('hello') 
-           this.greeting='changed'
+           this.greeting='one peace'
           }, 3000);
         },
       }).mount('#app')
